@@ -1,0 +1,25 @@
+nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 3rem;
+
+    span {
+        color: white;
+        text-decoration: none;
+        height: 100%;
+        padding: 0 .5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &.active {
+            color: #BB6B00;
+        }
+    }
+}
