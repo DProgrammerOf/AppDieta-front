@@ -1,0 +1,42 @@
+<main class="page second-background container">
+    <h3>
+        Informe os dados sobre o alimento para cadastra-lo no sistema
+        <br />
+        <span>(como: rótulo e as porções da tabela nutricional)</span>
+    </h3>
+
+    <form class="row">
+      <div class="col-12">
+        <label class="form-label" for="food-rotulo">Nome do produto</label>
+        <input [(ngModel)]="rotulo" class="form-control" id="food-rotulo" maxlength="200" name="rotulo" type="text">
+      </div>
+      <div class="col-6">
+        <label class="form-label" for="food-calorias">Calorias (kcal)</label>
+        <input [(ngModel)]="calorias" class="form-control" id="food-calorias" name="calorias" type="number">
+      </div>
+      <div class="col-6">
+        <label class="form-label" for="food-carboidratos">Carboidratos (g)</label>
+        <input [(ngModel)]="carboidratos" class="form-control" id="food-carboidratos" name="carboidratos" type="number">
+      </div>
+      <div class="col-6">
+        <label class="form-label" for="food-proteinas">Proteinas (g)</label>
+        <input [(ngModel)]="proteinas" class="form-control" id="food-proteinas" name="proteinas" type="number">
+      </div>
+      <div class="col-6">
+        <label class="form-label" for="food-gorduras">Gorduras Totais (g)</label>
+        <input [(ngModel)]="gorduras" class="form-control" id="food-gorduras" name="gorduras" type="number">
+      </div>
+      <div class="col-6">
+        <label class="form-label" for="food-fibra">Fibra (g)</label>
+        <input [(ngModel)]="fibra" class="form-control" id="food-fibra" name="fibra" type="number">
+      </div>
+      <div class="col-6">
+        <label class="form-label" for="food-sodio">Sódio (g)</label>
+        <input [(ngModel)]="sodio" class="form-control" id="food-sodio" name="sodio" type="number">
+      </div>
+
+      <div class="col-12 acoes">
+        <button (click)="save($event)" class="btn btn-primary" type="submit">Salvar</button>
+      </div>
+    </form>
+</main>

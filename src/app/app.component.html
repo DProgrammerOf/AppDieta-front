@@ -6,11 +6,11 @@
     <title>Aplicativo Dieta</title>
   </head>
   <body>
-    <nav class="primary-background">
-      <span routerLink="/alimentos" routerLinkActive="active" ariaCurrentWhenActive="page">Alimentos</span>
-      <span routerLink="/diarios" routerLinkActive="active" ariaCurrentWhenActive="page">Diarios</span>
-      <span routerLink="/medidas" routerLinkActive="active" ariaCurrentWhenActive="page">Medidas</span>
-    </nav>
-    <router-outlet></router-outlet>
+  <nav class="three-background">
+    <span ariaCurrentWhenActive="page" routerLink="/food" routerLinkActive="active">Alimentos</span>
+    <span ariaCurrentWhenActive="page" routerLink="/diary" routerLinkActive="active">Diarios</span>
+    <span ariaCurrentWhenActive="page" routerLink="/mesures" routerLinkActive="active">Medidas</span>
+  </nav>
+  <router-outlet></router-outlet>
   </body>
 </html>
