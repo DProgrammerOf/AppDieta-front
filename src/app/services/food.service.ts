@@ -3,13 +3,13 @@ import {BaseService, Food} from "./base.service";
 import {Observable} from "rxjs";
 
 // Response body
-interface ResponseAll {
+export interface ResponseAll {
   success: Boolean,
   message: string,
   food?: Food[] | undefined | null
 }
 
-interface ResponseOne {
+export interface ResponseOne {
   success: Boolean,
   message: string,
   food?: Food | undefined | null
@@ -19,7 +19,6 @@ interface Response {
   success: Boolean,
   message: string
 }
-
 // Response body
 
 @Injectable({

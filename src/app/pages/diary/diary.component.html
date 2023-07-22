@@ -1,6 +1,78 @@
-<p>diario works!</p>
+<div class="page-diary">
+  <div class="row">
+    <div class="col-8 d-flex align-content-end">
+      <h4>Refeições diárias</h4>
+    </div>
+    <div class="col-4 d-flex justify-content-end align-content-center">
+      <span (click)="showModalDiary()" class="btn btn-primary">
+        +
+      </span>
+    </div>
+  </div>
 
-<p *ngFor="let food of list_food">
-  {{ food.id }}
-  {{ food.rotulo }}
-</p>
+  <div class="row mt-4 p-2">
+    <h5 class="mb-2">Hoje</h5>
+    <div *ngFor="let diary of list_diaries" class="diary-item col-12 d-flex flex-column mb-2">
+      <span>
+        Data: {{ diary.date_at | date:'d/MM/YYYY':'+0' }}
+      </span>
+      <span>
+        Total: {{ diary.alimentos.length }} alimentos
+      </span>
+    </div>
+  </div>
+</div>
+
+<div [class.modal-hide]="!modal.visibility" [class.modal-show]="modal.visibility" id="modal-diary">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-4 d-flex align-items-center justify-content-between">
+        <h3>
+          Nova refeição
+        </h3>
+        <span (click)="closeModalDiary()" class="btn btn-danger">
+          X
+        </span>
+      </div>
+      <!-- FORM CADASTRO DIÁRIO !-->
+      <div class="col-12 d-flex flex-row gap-3 mb-4">
+        <label class="form-label d-flex flex-row align-items-center" for="food-date">Data</label>
+        <input [(ngModel)]="modal.input_date" class="form-control" id="food-date" name="date" type="date">
+      </div>
+      <div class="col-12">
+        <h6 class="fw-semibold text-center">
+          Alimentos
+        </h6>
+      </div>
+      <div class="col-12 mb-3">
+        <input (input)="refreshFilter()" [(ngModel)]="modal.input_foods_search"
+               class="form-control"
+               id="food-text-search" name="search" placeholder="Pesquisar rótulo do alimento" type="text"
+        >
+      </div>
+      <div class="col-12 mb-3">
+        <div id="list-foods">
+          <div *ngFor="let food of modal.input_foods_filtered" class="food-item mb-3">
+            <div class="d-flex flex-row">
+              <span (click)="addCount(food)" class="btn btn-success">+</span>
+              <input [attr.food-id]="food.id" [id]="food.rotulo" class="food-item-count" type="number" value="0"/>
+              <span (click)="subCount(food)" class="btn btn-danger">-</span>
+            </div>
+            <label [for]="food.rotulo" class="d-flex flex-row align-items-center">
+              {{ food.rotulo }}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 d-flex gap-1">
+        <span (click)="store()" class="btn btn-primary flex-fill">
+          Salvar
+        </span>
+        <span class="btn btn-warning flex-fill">
+          Limpar
+        </span>
+      </div>
+      <!-- FORM CADASTRO DIÁRIO !-->
+    </div>
+  </div>
+</div>

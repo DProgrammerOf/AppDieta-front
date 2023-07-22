@@ -14,11 +14,29 @@ export interface Food {
     proteinas: Number,
     sodio: Number
   },
-  created_at?: string,
-  updated_at?: string
+  created_at?: Date,
+  updated_at?: Date
 }
 
-// Object food
+// Object diary
+export interface DiaryFood {
+  food: Food,
+  amount: Number
+}
+
+export interface Diary {
+  id?: Number,
+  alimentos: DiaryFood[],
+  date_at: string,
+  created_at?: Date,
+  updated_at?: Date
+}
+
+// Object response default
+export interface Response {
+  success: Boolean,
+  message: string
+}
 
 @Injectable({
   providedIn: 'root'
