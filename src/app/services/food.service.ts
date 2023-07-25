@@ -1,23 +1,14 @@
 import {Injectable} from '@angular/core';
-import {BaseService, Food} from "./base.service";
+import {BaseService, Food, Response} from "./base.service";
 import {Observable} from "rxjs";
 
 // Response body
-export interface ResponseAll {
-  success: Boolean,
-  message: string,
+export interface AllFoods extends Response {
   food?: Food[] | undefined | null
 }
 
-export interface ResponseOne {
-  success: Boolean,
-  message: string,
+export interface OneFood {
   food?: Food | undefined | null
-}
-
-interface Response {
-  success: Boolean,
-  message: string
 }
 // Response body
 
@@ -31,11 +22,11 @@ export class FoodService {
   ) {
   }
 
-  public listAll(): Observable<ResponseAll> {
+  public listAll(): Observable<AllFoods> {
     return this.base.get('/food');
   }
 
-  public listOne(id: Number): Observable<ResponseOne> {
+  public listOne(id: Number): Observable<OneFood> {
     return this.base.get('/food/' + id.toString());
   }
 
