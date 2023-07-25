@@ -44,12 +44,14 @@ export class DiaryComponent implements OnInit {
     this.refreshDiaries();
   }
 
+  protected readonly moment = moment;
+
   protected refreshDiaries(data: Diary[] | undefined = undefined): void {
     if (data) {
       this.list_diaries = data;
     }
 
-    this.service.listAll().subscribe(
+    this.service.listToday().subscribe(
       (response: AllDiaries) => {
         if (response.success && response.diaries) {
           this.list_diaries = response.diaries;
@@ -58,8 +60,44 @@ export class DiaryComponent implements OnInit {
     )
   }
 
-  protected showModalDiary(): void {
-    this.modal.visibility = true;
+  // Functions to Diary
+  protected calculateToday(type: String): number {
+    let result = 0;
+    this.list_diaries?.forEach(element => {
+      element.alimentos?.forEach(day_food => {
+        if (type == 'calorias')
+          result += Number(day_food.food.tabela.calorias) * Number(day_food.amount);
+        else if (type == 'carboidratos')
+          result += Number(day_food.food.tabela.carboidratos) * Number(day_food.amount);
+        else if (type == 'proteinas')
+          result += Number(day_food.food.tabela.proteinas) * Number(day_food.amount);
+        else if (type == 'gorduras')
+          result += Number(day_food.food.tabela.gorduras) * Number(day_food.amount);
+        else if (type == 'sodio')
+          result += Number(day_food.food.tabela.sodio) * Number(day_food.amount);
+      });
+    });
+    return result;
+  }
+
+  protected calculateDiary(foods: DiaryFood[] | undefined, type: String): number {
+    let result = 0;
+    if (foods == undefined) {
+      return result;
+    }
+    foods.forEach(element => {
+      if (type == 'calorias')
+        result += Number(element.food.tabela.calorias) * Number(element.amount);
+      else if (type == 'carboidratos')
+        result += Number(element.food.tabela.carboidratos) * Number(element.amount);
+      else if (type == 'proteinas')
+        result += Number(element.food.tabela.proteinas) * Number(element.amount);
+      else if (type == 'gorduras')
+        result += Number(element.food.tabela.gorduras) * Number(element.amount);
+      else if (type == 'sodio')
+        result += Number(element.food.tabela.sodio) * Number(element.amount);
+    });
+    return result;
   }
 
   protected closeModalDiary(): void {
@@ -119,5 +157,10 @@ export class DiaryComponent implements OnInit {
         }
       }
     )
+  }
+
+  // Functions to Diary Modal
+  protected showModalDiary(): void {
+    this.modal.visibility = true;
   }
 }

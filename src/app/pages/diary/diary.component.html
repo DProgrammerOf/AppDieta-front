@@ -1,7 +1,7 @@
 <div class="page-diary">
   <div class="row">
-    <div class="col-8 d-flex align-content-end">
-      <h4>Refeições diárias</h4>
+    <div class="col-8 d-flex flex-column justify-content-center title-page">
+      {{ moment().format('D/MM')}}
     </div>
     <div class="col-4 d-flex justify-content-end align-content-center">
       <span (click)="showModalDiary()" class="btn btn-primary">
@@ -11,14 +11,53 @@
   </div>
 
   <div class="row mt-4 p-2">
-    <h5 class="mb-2">Hoje</h5>
+    <div class="diary-day mb-5">
+      <div class="table-nutritional d-flex flex-column">
+        <span class="header-title text-center text-uppercase mt-2 mb-2">Tabela Nutricional do Dia</span>
+        <div class="header row text-center">
+          <span class="col-3">Carboidratos</span>
+          <span class="col-3">Proteínas</span>
+          <span class="col-3">Gorduras</span>
+          <span class="col-3">Calorias</span>
+        </div>
+        <div class="body row text-center">
+          <span class="col-3">{{ calculateToday('carboidratos') }} g</span>
+          <span class="col-3">{{ calculateToday('proteinas') }} g</span>
+          <span class="col-3">{{ calculateToday('gorduras') }} g</span>
+          <span class="col-3">{{ calculateToday('calorias') }} kCal</span>
+        </div>
+      </div>
+    </div>
+
     <div *ngFor="let diary of list_diaries" class="diary-item col-12 d-flex flex-column mb-2">
-      <span>
-        Data: {{ diary.date_at | date:'d/MM/YYYY':'+0' }}
-      </span>
-      <span>
-        Total: {{ diary.alimentos.length }} alimentos
-      </span>
+      <div class="row p-2 text-center">
+        <span class="col-12 diary-date">Data: {{ diary.date_at | date:'d/MM/YYYY':'+0' }}</span>
+      </div>
+      <div class="table-nutritional d-flex flex-column">
+        <span class="header-title text-center mt-2 mb-2">Tabela nutricional da refeição</span>
+        <div class="header row text-center">
+          <span class="col-3">Carboidratos</span>
+          <span class="col-3">Proteínas</span>
+          <span class="col-3">Gorduras</span>
+          <span class="col-3">Calorias</span>
+        </div>
+        <div class="body row text-center">
+          <span class="col-3">{{ calculateDiary(diary.alimentos, 'carboidratos') }} g</span>
+          <span class="col-3">{{ calculateDiary(diary.alimentos, 'proteinas') }} g</span>
+          <span class="col-3">{{ calculateDiary(diary.alimentos, 'gorduras') }} g</span>
+          <span class="col-3">{{ calculateDiary(diary.alimentos, 'calorias') }} kCal</span>
+        </div>
+      </div>
+      <div class="row list-foods p-2">
+        <div class="col-12 text-center">
+          <span>Alimentos</span>
+        </div>
+        <span *ngFor="let diary_food of diary.alimentos" class="col-12 name-food">
+          {{ diary_food.food.rotulo }}
+          -
+          {{diary_food.amount > 1 ? diary_food.amount + " porções" : diary_food.amount + " porção"}}.
+        </span>
+      </div>
     </div>
   </div>
 </div>
@@ -26,7 +65,7 @@
 <div [class.modal-hide]="!modal.visibility" [class.modal-show]="modal.visibility" id="modal-diary">
   <div class="container">
     <div class="row">
-      <div class="col-12 mb-4 d-flex align-items-center justify-content-between">
+      <div class="col-12 mb-4 d-flex align-items-ce nter justify-content-between">
         <h3>
           Nova refeição
         </h3>

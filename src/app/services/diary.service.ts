@@ -27,6 +27,10 @@ export class DiaryService {
     return this.base.get('/diary');
   }
 
+  public listToday(): Observable<AllDiaries> {
+    return this.base.get('/diary/today');
+  }
+
   public store(date: string, foods: DiaryFood[]): Observable<AllDiaries> {
     return this.base.post('/diary/save', {date, foods});
   }
